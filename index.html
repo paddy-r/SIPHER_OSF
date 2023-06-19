@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <title>SIPHER_OSF</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+        <a class="navbar-brand" href="">SIPHER_OSF</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>   
+    <div class="container" style="margin-top: 80px;">
+        <h3>EmpRate</h3>
+    </div>
+
+    <svg id="my_dataviz" width="600" height="800"></svg>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+      // The svg
+      const svg = d3.select("svg"),
+          width = +svg.attr("width"),
+          height = +svg.attr("height");
+      
+
+    // Data and color scale
+let data = new Map()
+
+
+      // Map and projection
+      var projection = d3.geoMercator()
+    .center([0, 54])                // GPS of location to zoom on
+    .scale(2080)                       // This is like the zoom
+    .translate([ width/2, height/2 ])
+      
+      // Load external data and boot
+
+      
+      Promise.all([
+        d3.json("Data/ltla2023.geojson"),
+        d3.csv("Data/4_clust_revised.csv",function(d){data.set(d.areacd, d.EmpRate)})
+    ]).then( function(mapdata) {
+     //   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then( function(data) {
+      const colorScale = d3.scaleThreshold()
+  .domain([0,20,40,60,80,100])
+  .range(d3.schemeBlues[7]);
+        console.log(mapdata);
+        console.log(data);
+        let topo = mapdata[0]
+        console.log(topo);
+          // Draw the map
+          svg.append("g")
+              .selectAll("path")
+              .data(topo.features)
+              .join("path")
+                  .attr("fill", function (d) {
+        d.total = data.get(d.properties.areacd) || 0;
+        console.log(data.get(d.properties.areacd));
+        console.log(d.properties.areacd,data.get(d.properties.areacd));
+        return colorScale(d.total);
+      })
+                  .attr("d", d3.geoPath()
+                  .projection(projection)
+                  )
+                  .style("stroke", "#fff")
+      
+      })
+      </script>
+</body>
+</html>
