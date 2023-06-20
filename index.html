@@ -63,7 +63,7 @@
 
     Promise.all([
       //d3.json("Data/ltla2023.geojson"),
-      d3.json("Data/LAD.json"),
+      d3.json("Data/lad.json"),
       d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.LAD13CD, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp]) })
     ]).then(function (data) {
       mapdata = data
