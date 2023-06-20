@@ -20,10 +20,7 @@
     <h3 id="choice">EmpRate</h3>
     <label for="sel1">Select list (select one):</label>
       <select class="form-control" id="sel1" name="sellist1" onchange="getValue()">
-        <option>EmpRate</option>
-        <option>QualProportion</option>
-        <option>LTsick</option>
-        <option>digital</option>
+        
       </select>
   </div>
 
@@ -36,11 +33,16 @@
 
   <script>
     // The svg
+    var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","food","Decent","Turnout","PermEmp"]
+    var mapdata
     const svg = d3.select("svg"),
       width = +svg.attr("width"),
       height = +svg.attr("height");
-
-
+      var sel = document.getElementById("sel1")
+      for( i=0; i< names.length; i++){
+        sel.innerHTML+= "<option>"+names[i]+"</option>"
+      }
+     
     // Data and color scale
     let data = new Map()
     var getValue = function(){
@@ -57,8 +59,7 @@
     // Load external data and boot
 
     
-    var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","food","Decent","Turnout","PermEmp"]
-    var mapdata
+    
 
     Promise.all([
       //d3.json("Data/ltla2023.geojson"),
