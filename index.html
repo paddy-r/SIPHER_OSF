@@ -17,7 +17,14 @@
     </button>
   </nav>
   <div class="container" style="margin-top: 80px;">
-    <h3>EmpRate</h3>
+    <h3 id="choice">EmpRate</h3>
+    <label for="sel1">Select list (select one):</label>
+      <select class="form-control" id="sel1" name="sellist1" onchange="getValue()">
+        <option>EmpRate</option>
+        <option>QualProportion</option>
+        <option>LTsick</option>
+        <option>digital</option>
+      </select>
   </div>
 
   <svg id="my_dataviz" width="600" height="800"></svg>
@@ -36,7 +43,10 @@
 
     // Data and color scale
     let data = new Map()
-
+    var getValue = function(){
+      var e = document.getElementById("sel1");
+      plot(e.selectedIndex);
+    }
 
     // Map and projection
     var projection = d3.geoMercator()
@@ -46,28 +56,36 @@
 
     // Load external data and boot
 
-    var attribute = 0
-
-
+    
+    var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","food","Decent","Turnout","PermEmp"]
+    var mapdata
 
     Promise.all([
-      d3.json("Data/ltla2023.geojson"),
-      d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.areacd, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp]) })
-    ]).then(function (mapdata) {
-      console.log( data);
-      plot(mapdata)
+      //d3.json("Data/ltla2023.geojson"),
+      d3.json("Data/LAD.json"),
+      d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.LAD13CD, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp]) })
+    ]).then(function (data) {
+      mapdata = data
+      plot(3)
     })
     //   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then( function(data) {
 
-    var plot = function (mapdata) {
-      // for (const [key,value] of data){
-      //   min=0
-      //   max = 1000000000000
-      //   if
-      // }
-      const colorScale = d3.scaleThreshold()
-        .domain([0, 20, 40, 60, 80, 100])
-        .range(d3.schemeBlues[7]);
+    var plot = function (attribute) {
+      document.getElementById("choice").innerHTML=names[attribute]
+      max = 0
+      min = 10000000
+      for (const [key,value] of data){
+        v = parseFloat(value[attribute]);
+        if(v<min){
+          min = v
+        }
+        if(v>max){
+          max = v
+        }
+      }
+      const colorScale = d3.scaleLinear()
+        .domain([min, max])
+        .range(["white","blue"]);
       let topo = mapdata[0]
       // Draw the map
       svg.append("g")
@@ -75,12 +93,14 @@
         .data(topo.features)
         .join("path")
         .attr("fill", function (d) {
-          d.total = data.get(d.properties.areacd) || 0;
+          d.total = data.get(d.properties.LAD13CD) || 0;
+          //console.log(d.total[attribute])
           return colorScale(d.total[attribute]);
         })
         .attr("d", d3.geoPath()
           .projection(projection)
         )
+        //.attr("fill","red")
         .style("stroke", "#fff")
 
     }
