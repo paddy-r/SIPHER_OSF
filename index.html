@@ -217,7 +217,7 @@ function Legend(color, {
       d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.LAD13CD, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp]) })
     ]).then(function (data) {
       mapdata = data
-      plot(3)
+      plot(0)
     })
     //   d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson").then( function(data) {
 
