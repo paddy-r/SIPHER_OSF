@@ -223,6 +223,7 @@ function Legend(color, {
 
     var plot = function (attribute) {
       document.getElementById("choice").innerHTML=names[attribute]
+      svg.select("#my_dataviz")
       max = 0
       min = 10000000
       for (const [key,value] of data){
@@ -238,9 +239,11 @@ function Legend(color, {
         .domain([min, max])
         .range(["pink","blue"]);
       let topo = mapdata[0]
+      svg.selectAll("*").remove();
       // Draw the map
       svg.append("g")
-      .append(() => Legend(colorScale, {title: "Unemployment rate (%)", width: 260}))
+      .attr("transform", "translate(310,420)")
+      .append(() => Legend(colorScale, {title: names[attribute]+ " (%)", width: 260}))
       svg.append("g")
         .selectAll("path")
         .data(topo.features)
