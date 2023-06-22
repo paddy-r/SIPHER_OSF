@@ -209,7 +209,11 @@ function Legend(color, {
     // Load external data and boot
 
     
-    
+    let zoom = d3.zoom().on("zoom", handleZoom);
+
+    function handleZoom(e) {
+        d3.select("#map").attr("transform", e.transform);
+    }
 
     Promise.all([
      // d3.json("Local_Authority_Districts_December_2021_GB_BGC_2022_4485095093561745628.geojson"),
@@ -245,6 +249,8 @@ function Legend(color, {
       .attr("transform", "translate(310,420)")
       .append(() => Legend(colorScale, {title: names[attribute]+ " (%)", width: 260}))
       svg.append("g")
+      .attr("id","map")
+      .call(zoom)
         .selectAll("path")
         .data(topo.features)
         .join("path")
@@ -257,7 +263,8 @@ function Legend(color, {
           .projection(projection)
         )
         //.attr("fill","red")
-        .style("stroke", "#fff")
+        
+
 
 
     }
@@ -265,3 +272,8 @@ function Legend(color, {
 </body>
 
 </html>
+
+<!-- 
+  https://d3-graph-gallery.com/graph/barplot_ordered.html 
+https://d3-graph-gallery.com/barplot.html
+-->
