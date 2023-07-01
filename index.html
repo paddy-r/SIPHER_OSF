@@ -81,7 +81,7 @@
     // get data the map and the csv
     Promise.all([
       d3.json("Data/lad.json"),
-      d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.LAD13CD, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp]) })
+      d3.csv("Data/4_clust_revised.csv", function (d) { data.set(d.LAD13CD, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp,d.LAD21NM]) })
     ]).then(function (data) {
       mapdata = data
       plot(0)
@@ -113,6 +113,8 @@
       .attr("transform", "translate(10,0)")
 
 
+      mapspace.selectAll("*")
+      .remove()
       mapspace.selectAll("path")
         .data(topo.features)
         .join("path")
@@ -121,9 +123,20 @@
           //console.log(d.total[attribute])
           return colorScale(d.total[attribute]);
         })
+        .on("mouseover",function(d){ d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", 0.7);})
+      .on("mouseleave",function(d){ d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity",1);})
         .attr("d", d3.geoPath()
           .projection(projection)
         )
+        .append("title").text(function (d) {
+          return d.total[13]+" \n"+names[attribute] + " :" + d.total[attribute];
+        })
     
     }
   </script>
