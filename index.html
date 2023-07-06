@@ -18,18 +18,19 @@
   </nav>
   <div class="container" style="margin-top: 80px;">
     <div class="row">
-      <div class="col-6">
-        <div max-width="400">
+      <div class="col-6" id="scol">
+        <div id="mapContainer">
           <h3 id="choice">EmpRate</h3>
           <div class="form-group" width="400">
             <label for="sel1"></label>
           </div>
           <select class="form-control" width="400" id="sel1" name="sellist1" onchange="getValue()">
           </select>
-          <svg id="mapspace" width="400" height="400"
+          <br>
+          <svg id="mapspace"  height="600"
             style="border-style:none; background-color: rgb(186, 219, 238); "></svg>
           <br>
-          <svg id="ledgend" width="400" height="60" style="border-style:none; "></svg>
+          <svg id="ledgend"  height="60" style="border-style:none; "></svg>
           <div id="yearLabel">Year :2017</div>
           <input id="yearRange" min=2017 max=2021 type="range" class="form-control-range" name="range"
             onchange="getYear()">
@@ -65,8 +66,16 @@
     var mapdata
     let zoom = d3.zoom().on("zoom", handleZoom);
     const svg = d3.select("#mapspace")
-    const width = svg.attr("width");
+    const width = document.getElementById("mapContainer").clientWidth;
+    svg.attr("width",width)
     const height = svg.attr("height");
+    const mapspace = svg.append("g")
+    mapspace.attr("id", "map")
+    // Data and color scale
+    let data = new Map()
+
+
+
     var attribute = 0
     var year = "2017"
 
@@ -76,11 +85,10 @@
     svg.call(zoom)
     document.getElementById("yearRange").value = 2017
 
-    const ledgend = d3.select("#ledgend").append("g")
-    const mapspace = svg.append("g")
-    mapspace.attr("id", "map")
-    // Data and color scale
-    let data = new Map()
+    const ledgend = d3.select("#ledgend")
+    ledgend.attr("width",width)
+    ledgend.append("g")
+
 
 
     // get choice
@@ -100,8 +108,8 @@
 
     // Map and projection
     var projection = d3.geoTransverseMercator()
-      .center([-1, 55])
-      .scale(2080)
+      .center([-1.5, 55])
+      .scale(2900)
       .translate([width / 2, height / 2])
 
 
