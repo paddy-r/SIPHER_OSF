@@ -55,11 +55,13 @@
 
 
     var names = ["EmpRate", "QualProportion", "LTsick", "digital", "MaxMinRatio", "Access", "ratio_80_20", "AffRatio", "child_poverty", "food", "Decent", "Turnout", "PermEmp"]
+    var display_names = ["1A: Participation in paid employment (percentage of people aged 16-64 in employment)","1B: Skills and qualifications (percentage of people aged 16-29 with Level 2 or higher NVQ qualification)","2A: Involuntary exclusion from the labour market (proportion of people aged 16-64 on long-term sick)","2B: Digital connectivity (proportion of people digitally withdrawn or passive/uncommitted internet users)","3A: Wealth inequality (ratio of max. to min. house sale prices by ward)","3B: Physical connectivity (access to public transport)","4A: Earnings inequality (ratio of 80th to 20th percentiles of full-time earnings)","4B: Housing affordability (ratio of house prices to earnings)","5A: Poverty (percentage of children in low-income households)","5B: Cost of living (percentage of households experiencing food insecurity)","6A: Decent pay (proportion of employee jobs paid below Living Wage)","6B: Inclusion in decision-making (turnout at local elections)","7A: Job security (percentage of employees aged 16+ permanently employed)"]
 
+    console.log(names.length,display_names.length);
     // load choice to dropdown
     var sel = document.getElementById("sel1")
     for (i = 0; i < names.length; i++) {
-      sel.innerHTML += "<option>" + names[i] + "</option>"
+      sel.innerHTML += "<option>" + display_names[i] + "</option>"
     }
 
 
@@ -119,13 +121,14 @@
 
     // get data the map and the csv
     Promise.all([
-      d3.json("Data/lad.json"),
+    d3.json("Data/converted2.json"),
+    //d3.json("Data/Local_Authority_Districts_December_2021_GB_BGC_2022_4485095093561745628 copy.json"),
       d3.csv("Data/data_long_imputed_with_clusters.csv", function (d) { data.set(d.LAD13CD + d.year, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp, d.LAD21NM]) })
     ]).then(function (data) {
       mapdata = data
       plot(0)
     })
-
+ 
     var plot = function (attribute) {
       document.getElementById("choice").innerHTML = names[attribute]
       max = 0
@@ -141,7 +144,7 @@
       }
       const colorScale = d3.scaleLinear()
         .domain([min, max])
-        .range(["pink", "green"]);
+        .range(["purple", "orange"]);
 
 
       let topo = mapdata[0]
@@ -158,7 +161,8 @@
         .data(topo.features)
         .join("path")
         .attr("fill", function (d) {
-          d.total = data.get(d.properties.LAD13CD + year) || 0;
+        //  d.total = data.get(d.properties.LAD13CD + year) || 0;
+          d.total = data.get(d.properties.LAD21CD + year) || 0;
           return colorScale(d.total[attribute]);
         })
         .on("mouseover", function (d) {
