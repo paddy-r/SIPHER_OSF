@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <svg id="my_dataviz" width="400" height="300"></svg>
+    <svg id="my_dataviz" width="500" height="1000" style="border-style: solid;"></svg>
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v6.js"></script>
 
@@ -24,7 +24,7 @@
       .translate([width / 2, height / 2])
         
         // Load external data and boot
-        d3.json("lad.json").then( function(data) {
+        d3.json("converted2.json").then( function(data) {
         
             // Draw the map
             svg.append("g")
