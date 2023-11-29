@@ -159,6 +159,13 @@
         .remove()
       ledgend.append(() => Legend(colorScale, { title: names[attribute] + " (%)", width: width - 20 }))
         .attr("transform", "translate(10,0)")
+        .attr("visibility",function(d){
+          if (attribute == "Cluster"){ 
+            return "hidden"
+          }else{
+            return "visible"
+          }
+        })
 
 
       mapspace.selectAll("*")
