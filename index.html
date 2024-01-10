@@ -54,7 +54,7 @@
 
 
 
-    var names = ["EmpRate", "QualProportion", "LTsick", "digital", "MaxMinRatio", "Access", "ratio_80_20", "AffRatio", "child_poverty", "food", "Decent", "Turnout", "PermEmp"]
+    
     var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","Decent","Turnout","PermEmp","tdr","sr","le_both","le_var_abs_both","le_var_rel_both","le_male","le_var_abs_male","le_var_rel_male","le_female","le_var_abs_female","le_var_rel_female","Cluster"]
 
 
@@ -130,7 +130,7 @@
     d3.json("Data/converted2.json"),
     //d3.json("Data/Local_Authority_Districts_December_2021_GB_BGC_2022_4485095093561745628 copy.json"),
     // var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","Decent","Turnout","PermEmp","tdr","sr","le_both","le_var_abs_both","le_var_rel_both","le_male","le_var_abs_male","le_var_rel_male","le_female","le_var_abs_female","le_var_rel_female"]//,
-      d3.csv("Data/data_long_imputed_with_clusters.csv", function (d) { data.set(d.LAD13CD + d.year, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp, d.tdr,d.sr,d.le_both,d.le_var_abs_both,d.le_var_rel_both,d.le_male,d.le_var_abs_male,d.le_var_rel_male,d.le_female,d.le_var_abs_female,d.le_var_rel_female,d.LAD21NM]) })
+      d3.csv("Data/data_long_imputed_with_clusters.csv", function (d) { data.set(d.LAD13CD + d.year, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp, d.tdr,d.sr,d.le_both,d.le_var_abs_both,d.le_var_rel_both,d.le_male,d.le_var_abs_male,d.le_var_rel_male,d.le_female,d.le_var_abs_female,d.le_var_rel_female,d.Cluster,d.LAD21NM]) })
     ]).then(function (data) {
       mapdata = data
       plot(0)
@@ -159,10 +159,10 @@
 
       ledgend.selectAll("*")
         .remove()
-      ledgend.append(() => Legend(colorScale, { title: names[attribute] + " (%)", width: width - 20 }))
+      ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " (%)", width: width - 20 }))
         .attr("transform", "translate(10,0)")
         .attr("visibility",function(d){
-          if (attribute == "Cluster"){ 
+          if (attribute == 23){ 
             return "hidden"
           }else{
             return "visible"
@@ -179,9 +179,11 @@
         //  d.total = data.get(d.properties.LAD13CD + year) || 0;
           d.total = data.get(d.properties.LAD21CD + year) || 0;
           if(attribute<23){
+            console.log(names[attribute],d.total[attribute],attribute);
             return colorScale(d.total[attribute]);
           }
-          return colorOrd((int)d.total[attribute])
+          console.log(names[attribute],d.total[attribute],attribute);
+          return colorOrd(d.total[attribute+1])
         })
         .on("mouseover", function (d) {
           d3.select(this)
@@ -199,7 +201,7 @@
           .projection(projection)
         )
         .append("title").text(function (d) {
-          return d.total[13] + " \n" + names[attribute] + " :" + d.total[attribute];
+          return d.total[25] + " \n" + names[attribute] + " :" + d.total[attribute+1];
         })
 
     }
