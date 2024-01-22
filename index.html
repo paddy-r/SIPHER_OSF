@@ -178,7 +178,7 @@
         .domain([min, max])
         .range(["purple", "orange"]);
 
-      const colorOrd = d3.scaleOrdinal(d3.schemeSet2);
+      const colorOrd = d3.scaleOrdinal(d3.schemeSet1);
       let topo = mapdata[0]
 
       ledgend.selectAll("*")
@@ -186,7 +186,7 @@
       ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " (%)", width: width - 20 }))
         .attr("transform", "translate(10,0)")
         .attr("visibility",function(d){
-          if (attribute == 23){ 
+          if (attribute == 24){ 
             return "hidden"
           }else{
             return "visible"
@@ -203,12 +203,12 @@
         //  d.total = data.get(d.properties.LAD13CD + year) || 0;
           d.total = data.get(d.properties.LAD21CD + year) || 0;
           document.getElementById("output").innerHTML += d.total[25]+" " + year +" "+d.total[attribute]+"\n"
-          if(attribute<23){
+          if(attribute<24){
             console.log(names[attribute],d.total[attribute],attribute);
             return colorScale(d.total[attribute]);
           }
           console.log(names[attribute],d.total[attribute],attribute);
-          return colorOrd(d.total[attribute+1])
+          return colorOrd(d.total[attribute])
         })
         .on("mouseover", function (d) {
           d3.select(this)
