@@ -89,12 +89,12 @@
 
     var polarity =[1,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,2]
 
-    console.log(names.length,display_names.length);
+    // console.log(names.length,display_names.length);
     // load choice to dropdown
     var sel = document.getElementById("sel1")
     for (i = 0; i < names.length; i++) {
       sel.innerHTML += "<option>" + display_names[i] + "</option>"
-      console.log(display_names[i]);
+      // console.log(display_names[i]);
     }
 
 
@@ -162,7 +162,7 @@
     })
  
     var plot = function (attribute) {
-      console.log(attribute);
+      // console.log(attribute);
       document.getElementById("choice").innerHTML = display_names[attribute]
       // document.getElementById("output").innerHTML = names[attribute]+"\n"
       max = 0
@@ -207,7 +207,7 @@
         .attr("fill", function (d) {
         //  d.total = data.get(d.properties.LAD13CD + year) || 0;
           d.total = data.get(d.properties.LAD21CD + year) || 0;
-          // document.getElementById("output").innerHTML += d.total[25]+" " + year +" "+d.total[attribute]+"\n"
+          // console.log(d.total[25]+" " + year +" "+d.total[attribute])
           if(polarity[attribute]==1){
             return colorScale(d.total[attribute]);
           }
