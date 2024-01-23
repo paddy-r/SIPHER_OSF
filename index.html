@@ -36,9 +36,9 @@
             onchange="getYear()">
         </div>
       </div>
-      <div class="col-6" >
+      <!-- <div class="col-6" >
         <textarea class="form-control" id = "output" rows="50" cols="40" style="font-size: 12px; border: none;"readonly></textarea>
-      </div>
+      </div> -->
     </div>
 
   </div>
@@ -86,6 +86,8 @@
     "Lifespan variation at birth (e-dagger in years, females)",
     "Lifespan variation at birth (Keyfitz’ entropy, females)",
     "Four-cluster k-means solution (2020)"]
+
+    var polarity =[1,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,2]
 
     console.log(names.length,display_names.length);
     // load choice to dropdown
@@ -162,7 +164,7 @@
     var plot = function (attribute) {
       console.log(attribute);
       document.getElementById("choice").innerHTML = display_names[attribute]
-      document.getElementById("output").innerHTML = names[attribute]+"\n"
+      // document.getElementById("output").innerHTML = names[attribute]+"\n"
       max = 0
       min = 10000000
       for (const [key, value] of data) {
@@ -177,6 +179,9 @@
       const colorScale = d3.scaleLinear()
         .domain([min, max])
         .range(["purple", "orange"]);
+      const colorScaleReverse = d3.scaleLinear()
+        .domain([min, max])
+        .range(["orange", "purple"]);
 
       const colorOrd = d3.scaleOrdinal(d3.schemeSet1);
       let topo = mapdata[0]
@@ -202,13 +207,17 @@
         .attr("fill", function (d) {
         //  d.total = data.get(d.properties.LAD13CD + year) || 0;
           d.total = data.get(d.properties.LAD21CD + year) || 0;
-          document.getElementById("output").innerHTML += d.total[25]+" " + year +" "+d.total[attribute]+"\n"
-          if(attribute<24){
-            console.log(names[attribute],d.total[attribute],attribute);
+          // document.getElementById("output").innerHTML += d.total[25]+" " + year +" "+d.total[attribute]+"\n"
+          if(polarity[attribute]==1){
             return colorScale(d.total[attribute]);
           }
-          console.log(names[attribute],d.total[attribute],attribute);
-          return colorOrd(d.total[attribute])
+          if(polarity[attribute]==0){
+            console.log("polarity[attribute]");
+            return colorScaleReverse(d.total[attribute])
+          }
+          if(polarity[attribute]==2){
+            return colorOrd(d.total[attribute])
+          }
         })
         .on("mouseover", function (d) {
           d3.select(this)
