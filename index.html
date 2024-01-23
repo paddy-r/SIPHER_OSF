@@ -188,7 +188,9 @@
 
       ledgend.selectAll("*")
         .remove()
-      ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " (%)", width: width - 20 }))
+        if(polarity[attribute]==1){
+          ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " (%)", width: width - 20 }))
+        
         .attr("transform", "translate(10,0)")
         .attr("visibility",function(d){
           if (attribute == 24){ 
@@ -197,6 +199,21 @@
             return "visible"
           }
         })
+      }
+      if(polarity[attribute]==0){
+          ledgend.append(() => Legend(colorScaleReverse, { title: display_names[attribute] + " (%)", width: width - 20 }))
+        
+        .attr("transform", "translate(10,0)")
+        .attr("visibility",function(d){
+          if (attribute == 24){ 
+            return "hidden"
+          }else{
+            return "visible"
+          }
+        })
+      }
+
+
 
 
       mapspace.selectAll("*")
