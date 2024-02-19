@@ -69,7 +69,6 @@
       // console.log(display_names[i]);
     }
 
-
     var mapdata
     let zoom = d3.zoom().on("zoom", handleZoom);
     const svg = d3.select("#mapspace")
@@ -82,6 +81,7 @@
     let data = new Map()
 
 
+    addEventListener("resize", (event) => {width = document.getElementById("mapContainer").clientWidth;console.log("here");});
 
     var attribute = 0
     var year = "2017"
