@@ -59,6 +59,7 @@
 
 
     var polarity =[1,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,2]
+    
 
     // console.log(names.length,display_names.length);
     // load choice to dropdown
