@@ -72,7 +72,7 @@
     var mapdata
     let zoom = d3.zoom().on("zoom", handleZoom);
     const svg = d3.select("#mapspace")
-    const width = document.getElementById("mapContainer").clientWidth;
+    var width = document.getElementById("mapContainer").clientWidth;
     svg.attr("width",width)
     const height = svg.attr("height");
     const mapspace = svg.append("g")
@@ -81,8 +81,7 @@
     let data = new Map()
 
 
-    addEventListener("resize", (event) => {width = document.getElementById("mapContainer").clientWidth;console.log("here");});
-
+   
     var attribute = 0
     var year = "2017"
 
@@ -115,10 +114,16 @@
 
     // Map and projection
     var projection = d3.geoTransverseMercator()
-      .center([-1.5, 55])
+      .center([0, 55])
       .scale(2900)
-      .translate([width / 2, height / 2])
-
+      .translate([width / 1.4, height / 2])
+      
+    addEventListener("resize", (event) => {
+        width = document.getElementById("mapContainer").clientWidth;
+        projection .translate([width / 1.4, height / 2])
+        console.log(width);
+      });
+  
 
     function handleZoom(e) {
       d3.select("#map").attr("transform", e.transform);
@@ -132,7 +137,7 @@
       mapdata = data
       plot(0)
     })
- 
+    document.getElementById("output").innerHTML ="Map loading please wait"
     var plot = function (attribute) {
       // console.log(attribute);
       document.getElementById("output").innerHTML = display_text[attribute]
