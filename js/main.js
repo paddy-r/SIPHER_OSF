@@ -30,36 +30,36 @@
     "Lifespan variation at birth (Keyfitz’ entropy, females)",
     "Four-cluster k-means solution (2020)"]
 
-    var display_text = ["1A: Participation in paid employment (percentage of people aged 16-64 in employment) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "1B: Skills and qualifications (percentage of people aged 16-29 with Level 2 or higher NVQ qualification)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "2A: Involuntary exclusion from the labour market (proportion of people aged 16-64 on long-term sick)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "2B: Digital connectivity (proportion of people digitally withdrawn or passive/uncommitted internet users)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "3A: Wealth inequality (ratio of max. to min. house sale prices by ward)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "3B: Physical connectivity (access to public transport)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "4A: Earnings inequality (ratio of 80th to 20th percentiles of full-time earnings)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "4B: Housing affordability (ratio of house prices to earnings)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "5A: Poverty (percentage of children in low-income households)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "5B: Cost of living (percentage of households experiencing food insecurity)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "6A: Decent pay (proportion of employee jobs paid below Living Wage)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "6B: Inclusion in decision-making (turnout at local elections)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "7A: Job security (percentage of employees aged 16+ permanently employed)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Total dependency ratio, WHO definition (N(0-14y) + N(65+y)) / N(15-64y)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Sex ratio (males/females)Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Life expectancy at birth (in years, both sexes) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (e-dagger in years, both sexes) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (Keyfitz’ entropy, both sexes) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Life expectancy at birth (in years, males) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (e-dagger in years, males) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (Keyfitz’ entropy, males) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Life expectancy at birth (in years, females) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (e-dagger in years, females) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Lifespan variation at birth (Keyfitz’ entropy, females) Lorem ipsum dolor sit amet, labore excepteur dolor qui excepteur voluptate in sint consequat eiusmod",
-    "Four-cluster k-means solution (2020) \n (1) Less inclusive\n (2) More inclusive\n (3) Average\n (4) Mix of extremes."]
+    var display_text = ["Percentage of individuals aged 16-64 who are employed",
+      "Percentage of adults aged 16-49 with a Level 2 or higher NVQ qualification",
+      "Percentage of individuals aged 16-64 on long-term sick",
+      "Percentage of sub-areas within local authorities characterised by withdrawn or passive/uncommitted internet users or settled offline communities",
+      "Ratio of maximum to minimum house sale prices per ward within each local authority",
+      "Percentage of sub-areas with local authorities with good access to public transport",
+      "Ratio of 80th to 20th percentiles of weekly earnings (residents in FT work)",
+      "Ratio of house prices to earnings within each local authority",
+      "Percentage of children living in low-income households",
+      "Percentage of households experiencing food insecurity",
+      "Percentage of employee jobs that are not paid at or above the Living Wage, as defined by the Living Wage Foundation",
+      "Percentage of eligible voters participating in local elections",
+      "Percentage of employees aged 16-64 who are permanently employed",
+      "Ratio of the number of dependents aged zero to 14 and over 65, compared with the total population aged 15 to 64",
+      "Ratio of the number of males to number of females",
+      "LE at birth in years for both sexes combined",
+      "LV at birth in years – “e_dagger” – for both sexes combined",
+      "LV at birth, dimensionless – “Keyfitz Entropy” – for both sexes combined",
+      "LE at birth in years for males",
+      "LV at birth in years – “e_dagger” – for males",
+      "LV at birth, dimensionless – “Keyfitz Entropy” – for males",
+      "LE at birth in years for females",
+      "LV at birth in years – “e_dagger” – for females",
+      "LV at birth, dimensionless – “Keyfitz Entropy” – for both females",
+      "Four-cluster k-means solution (2020) \n (1) Less inclusive \n (2) More inclusive \n (3) Average \n (4) Mix of extremes"]
 
 
 
     var polarity =[1,1,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0,0,2]
-    
+    var percentage = ["(%)","(%)","(%)","(%)","","(%)",0,0,"(%)","(%)","(%)","(%)","(%)","(%)","","","","","","","","","","",""]
 
     // console.log(names.length,display_names.length);
     // load choice to dropdown
@@ -170,11 +170,11 @@
       ledgend.selectAll("*")
         .remove()
         if(polarity[attribute]==1){
-          ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " (%)", width: width - 20 }))
+          ledgend.append(() => Legend(colorScale, { title: display_names[attribute] + " "+percentage[attribute], width: width - 20 }))
         .attr("transform", "translate(10,0)")
       }
       if(polarity[attribute]==0){
-          ledgend.append(() => Legend(colorScaleReverse, { title: display_names[attribute] + " (%)", width: width - 20 }))
+          ledgend.append(() => Legend(colorScaleReverse, { title: display_names[attribute] + " "+percentage[attribute], width: width - 20 }))
         .attr("transform", "translate(10,0)")
       }
     //   if(polarity[attribute]==2){
