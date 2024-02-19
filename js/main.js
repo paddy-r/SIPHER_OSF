@@ -120,8 +120,12 @@
       
     addEventListener("resize", (event) => {
         width = document.getElementById("mapContainer").clientWidth;
-        projection .translate([width / 1.4, height / 2])
+        svg.attr("width",width)
+        projection.center([0, 55])
+        .scale(2900)
+        //.translate([width / 1.4, height / 2])
         console.log(width);
+        ledgend.attr("width",width)
       });
   
 
