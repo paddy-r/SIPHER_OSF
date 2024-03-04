@@ -4,57 +4,57 @@
     var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","food","Decent","Turnout","PermEmp","tdr","sr","le_both","le_var_abs_both","le_var_rel_both","le_male","le_var_abs_male","le_var_rel_male","le_female","le_var_abs_female","le_var_rel_female","Cluster"]
 
 
-    var display_names = ["1A: Participation in paid employment (percentage of people aged 16-64 in employment)",
-    "1B: Skills and qualifications (percentage of people aged 16-29 with Level 2 or higher NVQ qualification)",
-    "2A: Involuntary exclusion from the labour market (proportion of people aged 16-64 on long-term sick)",
-    "2B: Digital connectivity (proportion of people digitally withdrawn or passive/uncommitted internet users)",
-    "3A: Wealth inequality (ratio of max. to min. house sale prices by ward)",
-    "3B: Physical connectivity (access to public transport)",
-    "4A: Earnings inequality (ratio of 80th to 20th percentiles of full-time earnings)",
-    "4B: Housing affordability (ratio of house prices to earnings)",
-    "5A: Poverty (percentage of children in low-income households)",
-    "5B: Cost of living (percentage of households experiencing food insecurity)",
-    "6A: Decent pay (proportion of employee jobs paid below Living Wage)",
-    "6B: Inclusion in decision-making (turnout at local elections)",
-    "7A: Job security (percentage of employees aged 16+ permanently employed)",
-    "Total dependency ratio, WHO definition (N(0-14y) + N(65+y)) / N(15-64y)",
-    "Sex ratio (males/females)",
-    "Life expectancy at birth (in years, both sexes)",
-    "Lifespan variation at birth (e-dagger in years, both sexes)",
-    "Lifespan variation at birth (Keyfitz’ entropy, both sexes)",
-    "Life expectancy at birth (in years, males)",
-    "Lifespan variation at birth (e-dagger in years, males)",
-    "Lifespan variation at birth (Keyfitz’ entropy, males)",
-    "Life expectancy at birth (in years, females)",
-    "Lifespan variation at birth (e-dagger in years, females)",
-    "Lifespan variation at birth (Keyfitz’ entropy, females)",
-    "Four-cluster k-means solution (2020)"]
+    var display_names = ["1A: Participation in paid employment",
+    "1B: Skills and qualifications",
+    "2A: Involuntary exclusion from the labour market",
+    "2B: Digital exclusion",
+    "3A: Wealth inequality",
+    "3B: Physical connectivity",
+    "4A: Earnings inequality",
+    "4B: Housing affordability",
+    "5A: Poverty",
+    "5B: Costs of living",
+    "6A: Decent pay",
+    "6B: Inclusion in decision-making",
+    "7A: Job security/precarity",
+    "Total dependency ratio (TDR)",
+    "Sex ratio (SR)",
+    "Life expectancy (years), both sexes",
+    "Lifespan variation (years), both sexes",
+    "Lifespan variation (dimensionless), both sexes",
+    "Life expectancy (years), males",
+    "Lifespan variation (years), males",
+    "Lifespan variation (dimensionless), males",
+    "Life expectancy (years), females",
+    "Lifespan variation (years), females",
+    "Lifespan variation (dimensionless), females,",
+    "Clustering"]
 
-    var display_text = ["Percentage of individuals aged 16-64 who are employed",
-      "Percentage of adults aged 16-49 with a Level 2 or higher NVQ qualification",
-      "Percentage of individuals aged 16-64 on long-term sick",
-      "Percentage of sub-areas within local authorities characterised by withdrawn or passive/uncommitted internet users or settled offline communities",
-      "Ratio of maximum to minimum house sale prices per ward within each local authority",
-      "Percentage of sub-areas with local authorities with good access to public transport",
-      "Ratio of 80th to 20th percentiles of weekly earnings (residents in FT work)",
-      "Ratio of house prices to earnings within each local authority",
-      "Percentage of children living in low-income households",
-      "Percentage of households experiencing food insecurity",
-      "Percentage of employee jobs that are not paid at or above the Living Wage, as defined by the Living Wage Foundation",
-      "Percentage of eligible voters participating in local elections",
-      "Percentage of employees aged 16-64 who are permanently employed",
-      "Ratio of the number of dependents aged zero to 14 and over 65, compared with the total population aged 15 to 64",
-      "Ratio of the number of males to number of females",
-      "LE at birth in years for both sexes combined",
-      "LV at birth in years – “e_dagger” – for both sexes combined",
-      "LV at birth, dimensionless – “Keyfitz Entropy” – for both sexes combined",
-      "LE at birth in years for males",
-      "LV at birth in years – “e_dagger” – for males",
-      "LV at birth, dimensionless – “Keyfitz Entropy” – for males",
-      "LE at birth in years for females",
-      "LV at birth in years – “e_dagger” – for females",
-      "LV at birth, dimensionless – “Keyfitz Entropy” – for both females",
-      "Four-cluster k-means solution (2020) \n (1) Less inclusive \n (2) More inclusive \n (3) Average \n (4) Mix of extremes"]
+    var display_text = ["Percentage of working-age people (aged 16-64) who are employed",
+    "Percentage of adults aged 20-49 with a Level 2 or higher National Vocational Qualification (NVQ)",
+    "Percentage of working-age people (aged 16-64) who are inactive due to ill health or disability",
+    "Percentage of individuals who are classified as a) e-withdrawn, b) passive and uncommitted internet users, or c) settled offline communities; based on the Internet User Classification (IUC)",
+    "Ratio of median house prices in most expensive wards to median in least expensive",
+    "Public transport accessibility measure, percentage of Lower Super Output Area (LSOAs)/Data Zones (DZs) within the local authority area that are among the 50% most accessible LSOAs/DZs for each devolved nation",
+    "Ratio of weekly earnings for residents in full-time work between 80th and 20th percentiles",
+    "Ratio of median house prices to median gross annual earnings",
+    "Percentage of children living in low income households (based on national relative threshold, after adjustment for housing costs)",
+    "Percentage of households that are defined as fuel poor, according to national definition",
+    "Percentage of employee jobs that are paid below the Living Wage (as defined by the Living Wage Foundation)",
+    "Percentage of eligible voters participating in local elections",
+    "Percentage of employees on a permanent contract",
+    "Ratio of the number of dependents aged zero to 14 and over 65, compared with the total population aged 15 to 64 \  WHO definition: (N(0-14) + N(65+)) / N(15-64)",
+    "Ratio of the number of males to number of females \  Definition: N(males) / N(females)",
+    "Life expectancy at birth in years for both sexes combined",
+    "Lifespan variation at birth in years – “e_dagger” – for both sexes combined",
+    "Lifespan variation at birth, dimensionless – “Keyfitz Entropy” – for both sexes combined",
+    "Life expectancy at birth in years for males",
+    "Lifespan variation at birth in years – “e_dagger” – for males",
+    "Lifespan variation at birth, dimensionless – “Keyfitz Entropy” – for males",
+    "Life expectancy at birth in years for females",
+    "Lifespan variation at birth in years – “e_dagger” – for females",
+    "Lifespan variation at birth, dimensionless – “Keyfitz Entropy” – for females",
+    "Four-cluster k-means solution, computed for 2020 only \ This is a grouping of local authorities according to similarities between values of the indicators \n  (1) Less inclusive \n  (2) More inclusive \n  (3) Average \n  (4) Mix of extremes"]
 
 
 
@@ -181,6 +181,12 @@
           ledgend.append(() => Legend(colorScaleReverse, { title: display_names[attribute] + " "+percentage[attribute], width: width - 20 }))
         .attr("transform", "translate(10,0)")
       }
+      if(polarity[attribute] == 2 ){
+        document.getElementById("year").style.visibility = "hidden"; 
+      }else{
+        document.getElementById("year").style.visibility = "visible"; 
+      }
+      
     //   if(polarity[attribute]==2){
     //       ledgend.append("text")
     //       .attr("x", 10 )
