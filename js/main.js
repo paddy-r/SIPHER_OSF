@@ -54,7 +54,7 @@
     "Life expectancy at birth in years for females",
     "Lifespan variation at birth in years – “e_dagger” – for females",
     "Lifespan variation at birth, dimensionless – “Keyfitz Entropy” – for females",
-    "Four-cluster k-means solution, computed for 2020 only \ This is a grouping of local authorities according to similarities between values of the indicators \n  (1) Less inclusive \n  (2) More inclusive \n  (3) Average \n  (4) Mix of extremes"]
+    "Four-cluster k-means solution, computed for 2020 only. \nThis is a grouping of local authorities according to similarities between values of the indicators \n  (1) Less inclusive \n  (2) More inclusive \n  (3) Average \n  (4) Mix of extremes"]
 
 
 
