@@ -4,7 +4,8 @@
     var names = ["EmpRate","QualProportion","LTsick","digital","MaxMinRatio","Access","ratio_80_20","AffRatio","child_poverty","food","Decent","Turnout","PermEmp","tdr","sr","le_both","le_var_abs_both","le_var_rel_both","le_male","le_var_abs_male","le_var_rel_male","le_female","le_var_abs_female","le_var_rel_female","Cluster"]
 
 
-    var display_names = ["1A: Participation in paid employment",
+    var display_names = ["Clustering",
+    "1A: Participation in paid employment",
     "1B: Skills and qualifications",
     "2A: Involuntary exclusion from the labour market",
     "2B: Digital exclusion",
@@ -28,7 +29,7 @@
     "Life expectancy (years), females",
     "Lifespan variation (years), females",
     "Lifespan variation (dimensionless), females,",
-    "Clustering"]
+    ]
 
     var display_text = ["Percentage of working-age people (aged 16-64) who are employed",
     "Percentage of adults aged 20-49 with a Level 2 or higher National Vocational Qualification (NVQ)",
@@ -82,7 +83,7 @@
 
 
    
-    var attribute = 0
+    var attribute = 24
     var year = "2017"
 
 
@@ -101,6 +102,12 @@
     var getValue = function () {
       var e = document.getElementById("sel1");
       attribute = e.selectedIndex
+      if (attribute == 0){
+        attribute = 24
+      }else{
+        attribute = attribute -1 
+      }
+      console.log(attribute);
       plot(attribute);
     }
 
@@ -125,6 +132,7 @@
         .scale(2900)
         //.translate([width / 1.4, height / 2])
         console.log(width);
+        //24
         ledgend.attr("width",width)
       });
   
@@ -139,7 +147,7 @@
       d3.csv("Data/data_long_imputed_with_clusters.csv", function (d) { data.set(d.LAD13CD + d.year, [d.EmpRate, d.QualProportion, d.LTsick, d.digital, d.MaxMinRatio, d.Access, d.ratio_80_20, d.AffRatio, d.child_poverty, d.food, d.Decent, d.Turnout, d.PermEmp, d.tdr,d.sr,d.le_both,d.le_var_abs_both,d.le_var_rel_both,d.le_male,d.le_var_abs_male,d.le_var_rel_male,d.le_female,d.le_var_abs_female,d.le_var_rel_female,d.Cluster,d.LAD21NM]) })
     ]).then(function (data) {
       mapdata = data
-      plot(0)
+      plot(24)
     })
     document.getElementById("output").innerHTML ="Map loading please wait"
     var plot = function (attribute) {
