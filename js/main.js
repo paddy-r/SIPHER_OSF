@@ -28,7 +28,7 @@
     "Lifespan variation (dimensionless), males",
     "Life expectancy (years), females",
     "Lifespan variation (years), females",
-    "Lifespan variation (dimensionless), females,",
+    "Lifespan variation (dimensionless), females",
     ]
 
     var display_text = ["Percentage of working-age people (aged 16-64) who are employed",
@@ -44,8 +44,8 @@
     "Percentage of employee jobs that are paid below the Living Wage (as defined by the Living Wage Foundation)",
     "Percentage of eligible voters participating in local elections",
     "Percentage of employees on a permanent contract",
-    "Ratio of the number of dependents aged zero to 14 and over 65, compared with the total population aged 15 to 64 \  WHO definition: (N(0-14) + N(65+)) / N(15-64)",
-    "Ratio of the number of males to number of females \  Definition: N(males) / N(females)",
+    "Ratio of the number of dependents aged zero to 14 and over 65, compared with the total population aged 15 to 64 \n  definition: (N(0-14) + N(65+)) / N(15-64)",
+    "Ratio of the number of males to number of females \n  Definition: N(males) / N(females)",
     "Life expectancy at birth in years for both sexes combined",
     "Lifespan variation at birth in years – “e_dagger” – for both sexes combined",
     "Lifespan variation at birth, dimensionless – “Keyfitz Entropy” – for both sexes combined",
