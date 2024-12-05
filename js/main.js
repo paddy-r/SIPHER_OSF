@@ -37,7 +37,7 @@
     "Percentage of working-age people (aged 16-64) who are inactive due to ill health or disability",
     "Percentage of individuals who are classified as a) e-withdrawn, b) passive and uncommitted internet users, or c) settled offline communities; based on the Internet User Classification (IUC)",
     "Ratio of median house prices in most expensive wards to median in least expensive",
-    "Public transport accessibility measure, percentage of Lower Super Output Area (LSOAs)/Data Zones (DZs) within the local authority area that are among the 50% most accessible LSOAs/DZs for each devolved nation",
+    "Public transport accessibility measure, percentage of Lower Super Output Area (LSOAs)/Data Zones (DZs) within the local authority area that are among the 50% least accessible LSOAs/DZs for each devolved nation",
     "Ratio of weekly earnings for residents in full-time work between 80th and 20th percentiles",
     "Ratio of median house prices to median gross annual earnings",
     "Percentage of children living in low income households (based on national relative threshold, after adjustment for housing costs)",
